@@ -18,7 +18,8 @@ var cursors,
     fireButton,
     playerBullets,
     bullet,
-    bulletDelay = 0;
+    bulletDelay = 0
+    ;
 
 
 
@@ -61,20 +62,28 @@ function create(){
     //enemies
     alienBall = game.add.group();
 
-    for(var i = 0; i < 5; i++){
-        alienBall.create(game.world.randomX,game.world.randomY,'ball');
-    }
+
+    game.physics.arcade.enable(alienBall);
 
     alienBall.enableBody = true;
     alienBall.physicsBodyType = Phaser.Physics.ARCADE;
+
+   // alienBall.body.collideWorldBounds = true;
    // alienBall.body.immovable = true;
 
+    for(var i = 0; i < 5; i++){
+        var ball = alienBall.create(game.world.randomX,game.world.randomY,'ball');
+        ball.body.collideWorldBounds = true;
+    }
 
      cursors = game.input.keyboard.createCursorKeys();
      fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 }
 
+function ballTween(){
+   // var tween = game.add.tween(alienBall)
+}
 
 function playerFire(){
     if(game.time.now > bulletDelay) {
@@ -88,6 +97,11 @@ function playerFire(){
     }
 }
 
+function handleCollision(bullet,alien){
+    bullet.kill();
+    alien.kill();
+
+}
 function update(){
     thrustSpeed = 75;
   if(cursors.left.isDown){
@@ -107,4 +121,6 @@ function update(){
     if(fireButton.isDown){
         playerFire();
     }
+
+    game.physics.arcade.overlap(playerBullets,alienBall,handleCollision,null,this);
 }
