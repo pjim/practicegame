@@ -80,7 +80,9 @@ function create(){
      fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 }
-
+function playerCrash(player){
+   player.kill();
+}
 function ballTween(){
    // var tween = game.add.tween(alienBall)
 }
@@ -123,4 +125,5 @@ function update(){
     }
 
     game.physics.arcade.overlap(playerBullets,alienBall,handleCollision,null,this);
+    game.physics.arcade.overlap(player,alienBall,playerCrash);
 }
