@@ -1,0 +1,16 @@
+{
+  "name": "phaseprac",
+  "version": "1.0.0",
+  "description": "practice game",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "gulp": "^3.9.0",
+    "phaser": "^2.3.0"
+  }
+}
