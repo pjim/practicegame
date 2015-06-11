@@ -15,7 +15,9 @@ var cursors,
     player,
     thrustSpeed,
     alienBall,
-    fireButton;
+    fireButton,
+    playerBullets,
+    bullet;
 
 
 
@@ -51,7 +53,8 @@ function create(){
     playerBullets.enableBody = true;
     playerBullets.physicsBodyType = Phaser.Physics.ARCADE;
     playerBullets.createMultiple(50,'playerBullet');
-
+    playerBullets.setAll('outOfBoundsKill', true);
+    playerBullets.setAll('checkWorldBounds',true);
 
 
     //enemies
@@ -72,7 +75,14 @@ function create(){
 }
 
 
+function playerFire(){
+    bullet = playerBullets.getFirstExists(false);
+    if(bullet){
 
+        bullet.reset(player.x + 5,player.y);
+        bullet.body.velocity.x = 533;
+    }
+}
 
 function update(){
     thrustSpeed = 75;
@@ -91,6 +101,6 @@ function update(){
         player.body.velocity.y = - thrustSpeed;
     }
     if(fireButton.isDown){
-        alert('space');
+        playerFire();
     }
 }
