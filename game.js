@@ -17,7 +17,8 @@ var cursors,
     alienBall,
     fireButton,
     playerBullets,
-    bullet;
+    bullet,
+    bulletDelay = 0;
 
 
 
@@ -76,11 +77,14 @@ function create(){
 
 
 function playerFire(){
-    bullet = playerBullets.getFirstExists(false);
-    if(bullet){
+    if(game.time.now > bulletDelay) {
+        bullet = playerBullets.getFirstExists(false);
+        if (bullet) {
 
-        bullet.reset(player.x + 5,player.y);
-        bullet.body.velocity.x = 533;
+            bullet.reset(player.x + 5, player.y);
+            bullet.body.velocity.x = 533;
+            bulletDelay = game.time.now + 100;
+        }
     }
 }
 
