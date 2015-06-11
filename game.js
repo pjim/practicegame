@@ -14,7 +14,8 @@ var cursors,
     gameText,
     player,
     thrustSpeed,
-    alienBall;
+    alienBall,
+    fireButton;
 
 
 
@@ -25,6 +26,7 @@ function preload(){
     game.load.image('ship','./resources/thrust_ship.png');
     game.load.image('bomb','./resources/xenon2_bomb.png');
     game.load.image('ball','./resources/pangball.png');
+    game.load.image('playerBullet','./resources/enemy-bullet.png');
 
 }
 
@@ -44,16 +46,29 @@ function create(){
 
     player.body.collideWorldBounds = true;
 
+    //friendly bullets
+    playerBullets = game.add.group();
+
+
     //enemies
     alienBall = game.add.group();
-    game.physics.arcade.enable(alienBall);
+
     for(var i = 0; i < 5; i++){
         alienBall.create(game.world.randomX,game.world.randomY,'ball');
     }
 
+    alienBall.enableBody = true;
+    alienBall.physicsBodyType = Phaser.Physics.ARCADE;
+   // alienBall.body.immovable = true;
+
+
      cursors = game.input.keyboard.createCursorKeys();
+     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 }
+
+
+
 
 function update(){
     thrustSpeed = 75;
@@ -70,5 +85,8 @@ function update(){
 
     if(cursors.up.isDown){
         player.body.velocity.y = - thrustSpeed;
+    }
+    if(fireButton.isDown){
+        alert('space');
     }
 }
