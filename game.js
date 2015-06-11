@@ -79,12 +79,14 @@ function create(){
      cursors = game.input.keyboard.createCursorKeys();
      fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
+    ballTween();
 }
 function playerCrash(player){
    player.kill();
 }
 function ballTween(){
-   // var tween = game.add.tween(alienBall)
+   var tween = game.add.tween(alienBall).to({x:game.world.randomX,y:game.world.randomY},5000);
+    tween.start();
 }
 
 function playerFire(){
