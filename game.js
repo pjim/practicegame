@@ -48,6 +48,10 @@ function create(){
 
     //friendly bullets
     playerBullets = game.add.group();
+    playerBullets.enableBody = true;
+    playerBullets.physicsBodyType = Phaser.Physics.ARCADE;
+    playerBullets.createMultiple(50,'playerBullet');
+
 
 
     //enemies
